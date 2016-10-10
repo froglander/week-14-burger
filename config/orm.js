@@ -1,7 +1,5 @@
 var connection = require('./connection.js');
 
-console.log("orm.js");
-
 function printQuestionMarks(num) {
 	var array = [];
 
