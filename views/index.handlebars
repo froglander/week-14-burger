@@ -1,6 +1,21 @@
 <h1>Burger App</h1>
 
 <h2>Burgers to eat</h2>
+<ul>
 {{#each burgers}}
+<li>
 {{this.burger_name}}
+</li>
 {{/each}}
+</ul>
+
+<h2>Add a burger</h2>
+<form class="create-update-form" action="burgers/create" method="POST">
+
+	<div class="form-group">
+		<label for="burgerName">Burger Name:</label>
+		<input type="text" id="burgerName" name="name">
+	</div>
+
+	<button type="submit">Add Burger</button>
+</form>

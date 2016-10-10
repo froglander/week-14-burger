@@ -6,20 +6,24 @@ and the logic of each route.
 var express = require('express');
 var router = express.Router();
 var burger = require('../models/burger.js');
+var moment = require('moment');
 
 router.get('/', function(req, res) {
 	res.redirect('/burgers');
 });
 
 router.get('/burgers', function(req, res) {
-	burger.all(function(data) {
-		console.log("router.get burgers:");
-		console.log("data");
-		console.log(data);
+	burger.all(function(data) {		
 		var hndlbrsObj = {burgers: data };
 		console.log(hndlbrsObj);
 		res.render('index', hndlbrsObj);
 	});
+});
+
+router.post('/burgers/create', function(req, res) {
+	burger.create(['burger_name', 'devoured', 'date'], [req.body.name, false, moment().format("YYYY-MM-DD HH:mm:ss")], function() {
+		res.redirect('/burgers');
+	});	
 });
 
 module.exports = router;
