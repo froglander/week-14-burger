@@ -42,7 +42,10 @@ h2 {
 }
 
 .done-burgers {
-	
+	text-align: left;	    
+    margin: 3px;
+    padding: 5px 0px 5px 40px;
+    background-color: #9ba7af;   
 }
 
 .add-burger {

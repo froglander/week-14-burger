@@ -11,21 +11,32 @@
 			<h2>Burgers to eat</h2>
 			
 			{{#each burgers}}
-			<div class="new-burgers col-sm-8">
-			{{this.id}}. {{this.burger_name}}
-			</div>
-			<div class="col-sm-3">
-			<!-- <form action="" method="POST"> -->
-			<button>Devour It!</button>
-			<!-- </form> -->
-			</div>
-			
+			  {{#unless this.devoured}}
+				<div class="new-burgers col-sm-8">
+				{{this.id}}. {{this.burger_name}}
+				</div>
+
+				<div class="col-sm-3">
+				<form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+					<input type="hidden" name="devoured" value="true">
+					<button type="submit">Devour It!</button>
+				</form>
+				</div>
+			  {{/unless}}			
 			{{/each}}
 			
 		</div>
 
-		<div class="done-burgers col-sm-4 text-center">
+		<div class="col-sm-4 text-center">
 		<h2>Done burgers</h2>
+			{{#each burgers}}
+			  {{#if this.devoured}}
+				<div class="done-burgers col-sm-8">
+				{{this.id}}. {{this.burger_name}}
+				</div>				
+			  {{/if}}
+			{{/each}}
+
 		</div>
 
 		<div class="add-burger clearfix col-sm-8 col-sm-offset-2 text-center">

@@ -10,6 +10,19 @@ function printQuestionMarks(num) {
 	return array.toString();
 }
 
+function objToSql(ob) {
+	// column1=value, column2=value2,...
+	var arr = [];
+
+	for (var key in ob) {
+		if (ob.hasOwnProperty(key)) {
+			arr.push(key + '=' + ob[key]);
+		}
+	}
+
+	return arr.toString();
+}
+
 var orm = {
 	selectAll: function(tableInput, cb) {
 		var queryString = 'SELECT * FROM ' + tableInput + ';';
@@ -36,7 +49,20 @@ var orm = {
 		});
 
 	},
-	updateOne: function(tableInput) {
+	updateOne: function(table, objColVals, condition, cb) {
+		var queryString = 'UPDATE ' + table;
+
+		queryString = queryString + ' SET ';
+		queryString = queryString + objToSql(objColVals);
+		queryString = queryString + ' WHERE ';
+		queryString = queryString + condition;
+
+		console.log(queryString);
+
+		connection.query(queryString, function(err, result) {
+			if(err) throw err;
+			cb(result);
+		});
 
 	}
 };
