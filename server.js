@@ -1,7 +1,4 @@
-/*
-Here is where you set up your server file.
-Express middleware
-*/
+// Here is where you set up your server file.
 
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -26,6 +23,8 @@ app.set('view engine', 'handlebars');
 var routes = require('./controllers/burgers_controller.js');
 app.use('/', routes);
 
+// Make sure to use the || so it works both locally and once
+// you have deployed to heroku
 var port = process.env.PORT || 3000;
 app.listen(port);
 
